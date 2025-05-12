@@ -3,12 +3,53 @@
 At ACME corp, we run the Mode selection Quarkus app in every environment.
 
 ## Mode
-There are three types of mode:
+There are three types of supported mode for the app:
 
 * slim
 * standard
 * full
 
+When you start the app, always select one of those three mode with an environment variable called `MODE`.
+
+Example for the Container run with Podman:
+```
+podman run -e MODE=slim -p 8080:8080 -ti mode-selection:latest
+```
+
+Example for the Deployment on OpenShift:
+
+```
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mode-selection
+  labels:
+    app: mode-selection
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mode-selection
+  template:
+      labels:
+        app: mode-selection
+    spec:
+      containers:
+        - name: mode-selection
+          image: 'quay.io/bluesman/lightspeed-demo:latest'
+          env:
+            - name: MODE
+              value: standard
+          imagePullPolicy: Always
+      restartPolicy: Always
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+```
 
 ## Throubleshooting
 If the environment variable `MODE` is not set, the app will fail with a `RuntimeException`. Example:
@@ -25,42 +66,3 @@ If the environment variable `MODE` is not any of the allowed configuration `slim
 
 In order to avoid those error, add the `MODE` environment variable to your container run or to your Deployment in OpenShift and select only `slim`, `standard` or `full` as value.
 
-Example for the Container run with Podman:
-```
-podman run -e MODE=slim -p 8080:8080 -ti mode-selection:latest
-```
-
-Example for the Deployment on OpenShift:
-
-```
-kind: Deployment
-apiVersion: apps/v1
-metadata:
-  name: mode-selector
-  labels:
-    app: mode-selector
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: mode-selector
-  template:
-      labels:
-        app: mode-selector
-    spec:
-      containers:
-        - name: mode-selector
-          image: 'quay.io/bluesman/lightspeed-demo:latest'
-          env:
-            - name: MODE
-              value: standard
-          imagePullPolicy: Always
-      restartPolicy: Always
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 25%
-      maxSurge: 25%
-  revisionHistoryLimit: 10
-  progressDeadlineSeconds: 600
-```
