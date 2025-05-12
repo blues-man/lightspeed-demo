@@ -55,7 +55,7 @@ spec:
 If the environment variable `MODE` is not set, the app will fail with a `RuntimeException`. Example:
 
 ```
-2025-05-12 22:50:55,467 ERROR [io.qua.ver.htt.run.QuarkusErrorHandler] (executor-thread-1) HTTP Request to /hello failed, error id: 9ca1e7e8-513d-4fbe-80dc-8367a9bf009c-1: java.lang.RuntimeException: Environment variable MODE is not set
+2025-05-12 22:50:55,467 ERROR [io.qua.ver.htt.run.QuarkusErrorHandler] (executor-thread-1) HTTP Request to / failed, error id: 9ca1e7e8-513d-4fbe-80dc-8367a9bf009c-1: java.lang.RuntimeException: Environment variable MODE is not set
 ```
 
 If the environment variable `MODE` is not any of the allowed configuration `slim`, `standard`, `full`, the app will fail with a `RuntimeException`.
