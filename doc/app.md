@@ -31,6 +31,7 @@ spec:
     matchLabels:
       app: mode-selection
   template:
+    metadata:
       labels:
         app: mode-selection
     spec:
@@ -41,7 +42,7 @@ spec:
             - name: MODE
               value: standard
           imagePullPolicy: Always
-      restartPolicy: Always
+    restartPolicy: Always
   strategy:
     type: RollingUpdate
     rollingUpdate:
