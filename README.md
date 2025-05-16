@@ -1,4 +1,4 @@
-# lightspeed-demo
+# ACM Model Selection App for OpenShift Lightspeed Demo
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
