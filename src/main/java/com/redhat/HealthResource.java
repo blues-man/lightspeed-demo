@@ -8,7 +8,7 @@ import jakarta.ws.rs.core.MediaType;
 @Path("/alive")
 public class HealthResource {
 
-        @GET
+    @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
         return "Oh, I, oh I'm still alive";

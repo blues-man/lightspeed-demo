@@ -14,7 +14,7 @@ public class GreetingResource {
         String env = System.getenv("MODE");
         if (env == null) {
             throw new RuntimeException("Environment variable MODE is not set");
-        } else if (!env.equals("slim") || !env.equals("standard") || !env.equals("large")) {
+        } else if (!env.equals("slim") && !env.equals("standard") && !env.equals("large")) {
             throw new RuntimeException("Environment variable MODE is wrong");
         }
         return "Hello from ACME REST Quarkus with mode " + env;
