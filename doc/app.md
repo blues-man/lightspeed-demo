@@ -67,3 +67,8 @@ If the environment variable `MODE` is not any of the allowed configuration `slim
 
 In order to avoid those error, add the `MODE` environment variable to your container run or to your Deployment in OpenShift and select only `slim`, `standard` or `full` as value.
 
+Example:
+```
+oc patch deploy mode-selection -p '{"spec":{"template":{"spec":{"containers":[{"env":[{"name":"MODE","value":"standard"}]]}}}}'
+```
+
