@@ -17,6 +17,6 @@ public class GreetingResource {
         } else if (!env.equals("slim") && !env.equals("standard") && !env.equals("large")) {
             throw new RuntimeException("Environment variable MODE is wrong");
         }
-        return "Hello from ACME REST Quarkus with mode " + env;
+        return "Hello from ACME REST Quarkus Mode Selection, running with mode: " + env;
     }
 }
