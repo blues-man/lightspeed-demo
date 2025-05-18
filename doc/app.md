@@ -1,6 +1,6 @@
-# Mode selection App
+# Mode selector App
 
-At ACME corp, we run the Mode selection Quarkus app in every environment.
+At ACME corp, we run the Mode Selector Quarkus app in every environment.
 
 ## Mode
 There are three types of supported mode for the app:
@@ -13,7 +13,7 @@ When you start the app, always select one of those three mode with an environmen
 
 Example for the Container run with Podman:
 ```
-podman run -e MODE=slim -p 8080:8080 -ti mode-selection:latest
+podman run -e MODE=slim -p 8080:8080 -ti mode-selector:latest
 ```
 
 Example for the Deployment on OpenShift:
@@ -22,21 +22,21 @@ Example for the Deployment on OpenShift:
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: mode-selection
+  name: mode-selector
   labels:
-    app: mode-selection
+    app: mode-selector
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mode-selection
+      app: mode-selector
   template:
     metadata:
       labels:
-        app: mode-selection
+        app: mode-selector
     spec:
       containers:
-        - name: mode-selection
+        - name: mode-selector
           image: 'quay.io/bluesman/lightspeed-demo:latest'
           env:
             - name: MODE
@@ -69,6 +69,6 @@ In order to avoid those error, add the `MODE` environment variable to your conta
 
 Example:
 ```
-oc patch deploy mode-selection -p '{"spec":{"template":{"spec":{"containers":[{"env":[{"name":"MODE","value":"standard"}]]}}}}'
+oc patch deploy mode-selector -p '{"spec":{"template":{"spec":{"containers":[{"env":[{"name":"MODE","value":"standard"}]]}}}}'
 ```
 
